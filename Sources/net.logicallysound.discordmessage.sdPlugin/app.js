@@ -62,6 +62,9 @@ const action = {
 
     onKeyUp: function (jsn) {
         this.doSomeThing(jsn, 'onKeyUp', 'green');
+
+        console.log('Posting to Discord Webhook URL: %s', this.settings.discordwebhook);
+        console.log('Message: %s', this.settings.mymessage);
     },
 
     onSendToPlugin: function (jsn) {
