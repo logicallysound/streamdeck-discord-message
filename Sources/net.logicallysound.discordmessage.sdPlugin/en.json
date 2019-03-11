@@ -1,15 +1,8 @@
 {
-  "Description": "Use this to create your own plugin", 
-  "Name": "Discord Message", 
-  "Category": "Templates", 
+  "Description": "Send a message to a Discord channel.",
+  "Name": "Discord Message",
   "net.logicallysound.discordmessage.action": {
-    "Name": "Action", 
-    "Tooltip": "This is the only action in this plugin"
+    "Name": "Discord Message",
+    "Tooltip": "Send a message to a Discord text channel"
   },
-  "Localization": {
-    "More info": "More info",
-    "Message": "Message",
-    "Click Me": "Click Me",
-    "Button": "Button"
-  }
 }

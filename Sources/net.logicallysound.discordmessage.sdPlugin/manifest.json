@@ -2,13 +2,13 @@
   "Actions": [
     {
       "Icon": "action/images/actionimage",
-      "Name": "Example Action",
+      "Name": "Discord Message",
       "States": [
         {
           "Image": "action/images/action"
         }
       ],
-      "Tooltip": "This is an example tooltip",
+      "Tooltip": "Send a message to a Discord channel",
       "UUID": "net.logicallysound.discordmessage.action"
     }
   ],
