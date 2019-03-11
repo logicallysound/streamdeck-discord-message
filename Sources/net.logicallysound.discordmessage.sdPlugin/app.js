@@ -61,6 +61,13 @@ const action = {
     onKeyUp: function (jsn) {
         console.log('[app.js] Event received: keyUp');
 
+        if (!this.settings || !this.settings.discordwebhook) {
+          console.log('[app.js] No Discord webhook to post to!');
+          console.log('[app.js] Sending event: showAlert');
+          $SD.api.showAlert(jsn.context);
+          return;
+        }
+
         // Set up payload using the key's settings
         var payload = {
           "content": this.settings.mymessage
@@ -73,6 +80,18 @@ const action = {
         $.ajaxSetup({
           contentType: "application/json; charset=utf-8",
           dataType: "json",
+          success: function(data) {
+            console.log('[app.js] Sending event: showOk');
+            $SD.api.showOk(jsn.context);
+          },
+          failure: function(data) {
+            console.log('[app.js] Sending event: showAlert');
+            $SD.api.showAlert(jsn.context);
+          },
+          error: function(data) {
+            console.log('[app.js] Sending event: showAlert');
+            $SD.api.showAlert(jsn.context);
+          },
         });
 
         // Post to the Webhook
