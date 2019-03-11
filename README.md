@@ -3,17 +3,24 @@
 A Stream Deck Plugin that allows you to configure keys that send messages to
 Discord text channels.
 
+## Requirements
+
+* Stream Deck 4.1 or later
+* macOS 10.11+, Windows 10
+
 ## How to Install
 
 The packaged `.streamDeckPlugin` file is included in the `Release` directory.
 
 Open that file and the Stream Deck app will prompt you to install the plugin.
-When the plugin is installed, it will add the "Discord Message" action to the "Custom" section at the bottom of the Action List in the Stream Deck App.
+When the plugin is installed, it will add the "Discord Message" action to the
+"Custom" section at the bottom of the Action List in the Stream Deck App.
 
 ## How to use
 
 This plugin sends messages to Discord by posting to a Webhook. See
-[Intro to Webhooks](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks) to learn how to add a Webhook to your server.
+[Intro to Webhooks](https://support.discordapp.com/hc/en-us/articles/228383668-Intro-to-Webhooks)
+to learn how to add a Webhook to your server.
 
 Copy the Webhook URL and paste it into the "Webhook" text field when you're
 configuring your Stream Deck key. When you press the key, the message will be
