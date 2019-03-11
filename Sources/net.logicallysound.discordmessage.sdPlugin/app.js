@@ -65,6 +65,17 @@ const action = {
 
         console.log('Posting to Discord Webhook URL: %s', this.settings.discordwebhook);
         console.log('Message: %s', this.settings.mymessage);
+
+        // Set up request headers to send the data to the webhook properly
+        $.ajaxSetup({
+          contentType: "application/json; charset=utf-8",
+          dataType: "json",
+        });
+
+        // Post to the Webhook
+        $.post(this.settings.discordwebhook, JSON.stringify(
+          { "content": this.settings.mymessage }
+        ));
     },
 
     onSendToPlugin: function (jsn) {
