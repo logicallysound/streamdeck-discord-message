@@ -1,0 +1,2 @@
+# Ignore the zip file in Release
+Release/*.zip
