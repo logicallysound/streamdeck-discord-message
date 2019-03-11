@@ -18,13 +18,12 @@ function connected(jsn) {
     /** subscribe to the willAppear and other events */
     $SD.on('net.logicallysound.discordmessage.action.willAppear', (jsonObj) => action.onWillAppear(jsonObj));
     $SD.on('net.logicallysound.discordmessage.action.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-    $SD.on('net.logicallysound.discordmessage.action.sendToPlugin', (jsonObj) => action.onSendToPlugin(jsonObj));
     $SD.on('net.logicallysound.discordmessage.action.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
     $SD.on('net.logicallysound.discordmessage.action.propertyInspectorDidAppear', (jsonObj) => {
-        console.log('%c%s', 'color: white; background: black; font-size: 13px;', '[app.js]propertyInspectorDidAppear:');
+        console.log('[app.js] Event received: propertyInspectorDidAppear');
     });
     $SD.on('net.logicallysound.discordmessage.action.propertyInspectorDidDisappear', (jsonObj) => {
-        console.log('%c%s', 'color: white; background: red; font-size: 13px;', '[app.js]propertyInspectorDidDisappear:');
+        console.log('[app.js] Event received: propertyInspectorDidDisappear');
     });
 };
 
@@ -33,10 +32,9 @@ function connected(jsn) {
 const action = {
     settings:{},
     onDidReceiveSettings: function(jsn) {
-        console.log('%c%s', 'color: white; background: red; font-size: 15px;', '[app.js]onDidReceiveSettings:');
+        console.log('[app.js] Event received: didReceiveSettings');
 
         this.settings = Utils.getProp(jsn, 'payload.settings', {});
-        this.doSomeThing(this.settings, 'onDidReceiveSettings', 'orange');
     },
 
     /**
@@ -47,7 +45,7 @@ const action = {
      */
 
     onWillAppear: function (jsn) {
-        console.log("You can cache your settings in 'onWillAppear'", jsn.payload.settings);
+        console.log('[app.js] Event received: willAppear');
         /**
          * "The willAppear event carries your saved settings (if any). You can use these settings
          * to setup your plugin or save the settings for later use.
@@ -61,10 +59,15 @@ const action = {
     },
 
     onKeyUp: function (jsn) {
-        this.doSomeThing(jsn, 'onKeyUp', 'green');
+        console.log('[app.js] Event received: keyUp');
 
-        console.log('Posting to Discord Webhook URL: %s', this.settings.discordwebhook);
-        console.log('Message: %s', this.settings.mymessage);
+        // Set up payload using the key's settings
+        var payload = {
+          "content": this.settings.mymessage
+        };
+
+        console.log('[app.js] Posting to Discord Webhook URL: %s', this.settings.discordwebhook);
+        console.log('[app.js] Webhook payload: ', payload);
 
         // Set up request headers to send the data to the webhook properly
         $.ajaxSetup({
@@ -73,34 +76,7 @@ const action = {
         });
 
         // Post to the Webhook
-        $.post(this.settings.discordwebhook, JSON.stringify(
-          { "content": this.settings.mymessage }
-        ));
+        $.post(this.settings.discordwebhook, JSON.stringify(payload));
     },
-
-    onSendToPlugin: function (jsn) {
-        /**
-         * this is a message sent directly from the Property Inspector
-         * (e.g. some value, which is not saved to settings)
-         * You can send this event from Property Inspector (see there for an example)
-         */
-
-        const sdpi_collection = Utils.getProp(jsn, 'payload.sdpi_collection', {});
-        if (sdpi_collection.value && sdpi_collection.value !== undefined) {
-            this.doSomeThing({ [sdpi_collection.key] : sdpi_collection.value }, 'onSendToPlugin', 'fuchsia');
-        }
-    },
-
-    /**
-     * Finally here's a methood which gets called from various events above.
-     * This is just an idea how you can act on receiving some interesting message
-     * from Stream Deck.
-     */
-
-    doSomeThing: function(inJsonData, caller, tagColor) {
-        console.log('%c%s', `color: white; background: ${tagColor || 'grey'}; font-size: 15px;`, `[app.js]doSomeThing from: ${caller}`);
-        // console.log(inJsonData);
-    },
-
 
 };
