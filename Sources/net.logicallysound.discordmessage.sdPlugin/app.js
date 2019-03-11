@@ -92,22 +92,6 @@ const action = {
     },
 
     /**
-     * This snippet shows, how you could save settings persistantly to Stream Deck software
-     * It is not used in this example plugin.
-     */
-
-    saveSettings: function (jsn, sdpi_collection) {
-        console.log('saveSettings:', jsn);
-        if (sdpi_collection.hasOwnProperty('key') && sdpi_collection.key != '') {
-            if (sdpi_collection.value && sdpi_collection.value !== undefined) {
-                this.settings[sdpi_collection.key] = sdpi_collection.value;
-                console.log('setSettings....', this.settings);
-                $SD.api.setSettings(jsn.context, this.settings);
-            }
-        }
-    },
-
-    /**
      * Finally here's a methood which gets called from various events above.
      * This is just an idea how you can act on receiving some interesting message
      * from Stream Deck.
