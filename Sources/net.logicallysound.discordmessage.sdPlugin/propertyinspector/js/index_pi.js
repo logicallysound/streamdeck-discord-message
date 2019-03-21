@@ -109,6 +109,13 @@ const updateUI = (pl) => {
             console.log(`searching for: #${e}`, 'found:', foundElement);
             if (foundElement) {
                 foundElement.value = pl[e];
+                const maxl = foundElement.getAttribute('maxlength') || 50;
+                const labels = document.querySelectorAll(`[for='${foundElement.id}']`);
+                if (labels.length) {
+                    for (let x of labels) {
+                        x.textContent = maxl ? `${foundElement.value.length}/${maxl}` : `${foundElement.value.length}`;
+                    }
+                }
             }
         }
    })

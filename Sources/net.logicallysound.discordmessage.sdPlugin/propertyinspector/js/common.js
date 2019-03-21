@@ -1059,16 +1059,27 @@ const SDApi = {
         getGlobalSettings: function (context, payload) {
             SDApi.send(context, 'getGlobalSettings', {});
         },
-        
+
         setGlobalSettings: function (context, payload) {
             SDApi.send(context, 'setGlobalSettings', {
                 payload: payload
             });
         },
 
-        logMessage: function (context, payload) {
-            SDApi.send(context, 'logMessage', {
-                payload: payload
+        logMessage: function () {
+           /**
+            * for logMessage we don't need a context, so we allow both
+            * logMessage(unneededContext, 'message')
+            * and
+            * logMessage('message')
+            */
+
+            let payload = (arguments.length > 1) ? arguments[1] : arguments[0];
+
+            SDApi.send(null, 'logMessage', {
+                payload: {
+                    message: payload
+                }
             });
         },
 

@@ -1,3 +1,15 @@
+:root {
+  --sdpi-bgcolor: #2D2D2D;
+  --sdpi-background: #3D3D3D;
+  --sdpi-color: #d8d8d8;
+  --sdpi-bordercolor: #3a3a3a;
+  --sdpi-buttonbordercolor: #969696;
+  --sdpi-borderradius: 0px;
+  --sdpi-width: 224px;
+  --sdpi-fontweight: 600;
+  --sdpi-letterspacing: -0.25pt;
+}
+
 html {
   --sdpi-bgcolor: #2D2D2D;
   --sdpi-background: #3D3D3D;
@@ -1141,7 +1153,7 @@ input:required:valid {
 :title {
   color: yellow;
 }
-
+/*
 [title]:hover {
   display: flex;
   align-items: center;
@@ -1158,8 +1170,10 @@ input:required:valid {
   border: 8px solid transparent;	
   border-bottom: 8px solid #000;
 }
+
 [title]:hover::before {
-content: attr(title);
+    content: attr(title);
+    position: absolute;
     display: flex;
     justify-content: center;
     align-self: center;
@@ -1170,7 +1184,6 @@ content: attr(title);
     font-size: 9pt;
     font-family: sans-serif;
     opacity: 1;
-    position: absolute;
     height: auto;
     /* width: 50%;
     left: 35%; */
@@ -1178,9 +1191,8 @@ content: attr(title);
     bottom: 2px;
     z-index: 100;
     box-shadow: 0px 3px 6px rgba(0, 0, 0, .5);
-    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
-
+*/
 .sdpi-item-group.file {
   width: 232px;
   display: flex;
