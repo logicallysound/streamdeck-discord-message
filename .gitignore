@@ -1,6 +1,6 @@
 # Ignore Release files
-Release/*.streamDeckPlugin
-Release/*.zip
+Release/*
+Release/!.gitkeep
 
 # OS-generated files
 .DS_Store
