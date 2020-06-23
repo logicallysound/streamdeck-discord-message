@@ -17,6 +17,8 @@
   "CodePath": "index.html",
   "PropertyInspectorPath": "propertyinspector/index.html",
   "Description": "Send a Message to a Discord Channel",
+  "Category": "Discord",
+  "CategoryIcon": "action/images/discord_cat",
   "Name": "Discord Message",
   "Icon": "action/images/action",
   "URL": "https://github.com/logicallysound/stream-deck-discord-message",

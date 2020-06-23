@@ -1,0 +1,8 @@
+{
+  "Description": "Sendet einen text an einen Discord-Kanal.",
+  "Name": "Discord Nachricht",
+  "net.logicallysound.discordmessage.action": {
+    "Name": "Discord Nachricht",
+    "Tooltip": "Text an einen Discord Kanal senden"
+  },
+}

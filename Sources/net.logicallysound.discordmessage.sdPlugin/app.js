@@ -16,16 +16,17 @@ $SD.on('connected', (jsonObj) => connected(jsonObj));
 
 function connected(jsn) {
     /** subscribe to the willAppear and other events */
-    $SD.on('net.logicallysound.discordmessage.action.willAppear', (jsonObj) => action.onWillAppear(jsonObj));
-    $SD.on('net.logicallysound.discordmessage.action.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-    $SD.on('net.logicallysound.discordmessage.action.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
-    $SD.on('net.logicallysound.discordmessage.action.propertyInspectorDidAppear', (jsonObj) => {
+    $SD.on('net.logicallysound.discordmessage.action.willAppear', jsonObj => action.onWillAppear(jsonObj));
+    $SD.on('net.logicallysound.discordmessage.action.keyUp', jsonObj => action.onKeyUp(jsonObj));
+    $SD.on('net.logicallysound.discordmessage.action.didReceiveSettings', jsonObj => action.onDidReceiveSettings(jsonObj));
+    $SD.on('net.logicallysound.discordmessage.action.propertyInspectorDidAppear', jsonObj => {
         console.log('[app.js] Event received: propertyInspectorDidAppear');
     });
-    $SD.on('net.logicallysound.discordmessage.action.propertyInspectorDidDisappear', (jsonObj) => {
+    $SD.on('net.logicallysound.discordmessage.action.propertyInspectorDidDisappear', jsonObj => {
         console.log('[app.js] Event received: propertyInspectorDidDisappear');
     });
 };
+
 
 /** ACTIONS */
 
@@ -46,7 +47,7 @@ const action = {
 
     onWillAppear: function (jsn) {
         console.log('[app.js] Event received: willAppear');
-        /**
+		/**
          * "The willAppear event carries your saved settings (if any). You can use these settings
          * to setup your plugin or save the settings for later use.
          * If you want to request settings at a later time, you can do so using the
@@ -55,13 +56,14 @@ const action = {
          *
          * $SD.api.getSettings(jsn.context);
         */
-        this.settings = jsn.payload.settings;
+        if (!this.settings) this.settings={};
+		this.settings[jsn.context] = jsn.payload.settings;
     },
 
     onKeyUp: function (jsn) {
         console.log('[app.js] Event received: keyUp');
 
-        if (!this.settings || !this.settings.discordwebhook) {
+        if (!this.settings || !this.settings[jsn.context].discordwebhook) {
           console.log('[app.js] No Discord webhook to post to!');
           console.log('[app.js] Sending event: showAlert');
           $SD.api.showAlert(jsn.context);
@@ -70,10 +72,10 @@ const action = {
 
         // Set up payload using the key's settings
         var payload = {
-          "content": this.settings.mymessage
+          "content": this.settings[jsn.context].mymessage
         };
 
-        console.log('[app.js] Posting to Discord Webhook URL: %s', this.settings.discordwebhook);
+        console.log('[app.js] Posting to Discord Webhook URL: %s', this.settings[jsn.context].discordwebhook);
         console.log('[app.js] Webhook payload: ', payload);
 
         // Set up request headers to send the data to the webhook properly
@@ -95,7 +97,7 @@ const action = {
         });
 
         // Post to the Webhook
-        $.post(this.settings.discordwebhook, JSON.stringify(payload));
+        $.post(this.settings[jsn.context].discordwebhook, JSON.stringify(payload));
     },
 
 };
