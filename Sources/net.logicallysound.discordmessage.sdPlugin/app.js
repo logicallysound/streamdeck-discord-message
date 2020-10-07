@@ -35,7 +35,7 @@ const action = {
     onDidReceiveSettings: function(jsn) {
         console.log('[app.js] Event received: didReceiveSettings');
 
-        this.settings = Utils.getProp(jsn, 'payload.settings', {});
+        this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
     },
 
     /**
@@ -47,7 +47,7 @@ const action = {
 
     onWillAppear: function (jsn) {
         console.log('[app.js] Event received: willAppear');
-		/**
+		    /**
          * "The willAppear event carries your saved settings (if any). You can use these settings
          * to setup your plugin or save the settings for later use.
          * If you want to request settings at a later time, you can do so using the
@@ -57,7 +57,7 @@ const action = {
          * $SD.api.getSettings(jsn.context);
         */
         if (!this.settings) this.settings={};
-		this.settings[jsn.context] = jsn.payload.settings;
+        $SD.api.getSettings(jsn.context);
     },
 
     onKeyUp: function (jsn) {

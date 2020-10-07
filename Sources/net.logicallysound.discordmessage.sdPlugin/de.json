@@ -4,5 +4,5 @@
   "net.logicallysound.discordmessage.action": {
     "Name": "Discord Nachricht",
     "Tooltip": "Text an einen Discord Kanal senden"
-  },
+  }
 }
