@@ -1,6 +1,7 @@
 # Ignore Release files
 Release/*
 Release/!.gitkeep
+**/DistributionTool.exe
 
 # OS-generated files
 .DS_Store
