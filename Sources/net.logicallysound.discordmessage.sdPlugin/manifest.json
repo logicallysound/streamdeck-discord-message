@@ -22,7 +22,7 @@
   "Name": "Discord Message",
   "Icon": "action/images/action",
   "URL": "https://github.com/logicallysound/stream-deck-discord-message",
-  "Version": "1.1.0",
+  "Version": "1.1.1",
   "OS": [
     {
       "Platform": "mac",
