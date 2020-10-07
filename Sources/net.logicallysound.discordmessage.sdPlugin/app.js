@@ -35,7 +35,7 @@ const action = {
     onDidReceiveSettings: function(jsn) {
         console.log('[app.js] Event received: didReceiveSettings');
 
-        this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings');
+        this.settings[jsn.context] = Utils.getProp(jsn, 'payload.settings', {});
     },
 
     /**
