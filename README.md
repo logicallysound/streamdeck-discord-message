@@ -10,12 +10,14 @@ Discord text channels.
 
 ## How to Install
 
-Download a zip file from Releases and extract it to find a `.streamDeckPlugin`
-file inside.
+Download the `.streamDeckPlugin` file from the latest release.
 
 Open that file and the Stream Deck app will prompt you to install the plugin.
 When the plugin is installed, it will add the "Discord Message" action to the
 "Custom" section at the bottom of the Action List in the Stream Deck App.
+
+If nothing happens when you open the file, make sure your Stream Deck is
+plugged in and try again.
 
 ## How to use
 
